@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author SummCoder
- * @desc  Spring Security.
+ * @desc Spring Security.
  * @date 2024/2/19 22:05
  */
 
