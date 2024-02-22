@@ -1,4 +1,15 @@
 spring:
   datasource:
     generate-unique-name: false
+    # H2 Database 配置
     name: blog
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/.miniBlog/db/blog
+    username: admin
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false

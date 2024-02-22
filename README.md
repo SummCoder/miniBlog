@@ -7,7 +7,7 @@
 所用知识点：
 - 依赖注入
 - AOP
-- Spring MVC
+- ~~Spring MVC(前后端不分离)~~
 - JPA
 - Spring Security
 - REST API范式
