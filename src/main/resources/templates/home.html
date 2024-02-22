@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Spring Boot Contacts</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+  </head>
+
+  <body>
+    <h2>Spring Boot Contacts</h2>
+    <form method="POST" th:object="${contact}">
+      <label for="firstName">First Name:</label>
+      <input type="text" th:field="*{firstName}">
+      <span class="validationError"
+            th:if="${#fields.hasErrors('firstName')}"
+            th:errors="*{firstName}">firstName</span>
+      <br/>
+      <label for="lastName">Last Name:</label>
+      <input type="text" th:field="*{lastName}">
+      <span class="validationError"
+            th:if="${#fields.hasErrors('lastName')}"
+            th:errors="*{lastName}">lastName</span>
+      <br/>
+      <label for="phoneNumber">Phone #:</label>
+      <input type="text" th:field="*{phoneNumber}">
+      <span class="validationError"
+            th:if="${#fields.hasErrors('phoneNumber')}"
+            th:errors="*{phoneNumber}">phoneNumber</span>
+      <br/>
+      <label for="emailAddress">Email:</label>
+      <input type="text" th:field="*{emailAddress}">
+      <span class="validationError"
+            th:if="${#fields.hasErrors('emailAddress')}"
+            th:errors="*{emailAddress}">emailAddress</span>
+      <br/>
+      <input type="submit">
+    </form>
+    <ul th:each="contact : ${contactList.arrayList}">
+      <li>
+        <span th:text="${contact.firstName}">First</span>
+        <span th:text="${contact.lastName}">Last</span>
+        <span th:text="${contact.phoneNumber}">phoneNumber</span>
+        <span th:text="${contact.emailAddress}">emailAddress</span>
+      </li>
+    </ul>
+  </body>
+</html>

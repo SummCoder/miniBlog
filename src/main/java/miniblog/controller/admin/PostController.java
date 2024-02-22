@@ -30,11 +30,6 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping
-    public String hello() {
-        return "editormd/editormd";
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Post> postById(@PathVariable("id") Integer id) {
         Optional<Post> optPost = postService.getPostById(id);
