@@ -8,6 +8,11 @@
     <link rel="stylesheet" th:href="@{/editormd/css/editormd.css}"/>
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
     <style>
+
+        body {
+            background-color: #eee;
+        }
+
         #title-input {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -41,6 +46,21 @@
             color: white;
         }
 
+        #publish-button {
+            width: 80%;
+            margin: 15px auto auto;
+        }
+
+        #publish-button button {
+            float: right;
+            background-color: #1890ff;
+            color: white;
+            font-size: 14px;
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: none;
+        }
+
     </style>
 </head>
 <body>
@@ -49,8 +69,8 @@
         <ul id="nav-post">
             <li><a>Blog Dashboard</a></li>
             <li><a href="manage">内容管理</a></li>
-            <li><a href="write">写文章</a></li>
-            <li><a href="info">个人信息</a></li>
+            <li><a href="write"><b>写文章</b></a></li>
+            <li><a href="info">修改信息</a></li>
             <li style="float:right"><a href="/logout">登出</a></li>
         </ul>
     </header>
@@ -61,6 +81,9 @@
     <div id="test-editormd">
         <textarea style="display:none;"></textarea>
     </div>
+    <div id="publish-button">
+        <button type="button">发 布</button>
+    </div>
 </div>
 <script th:src="@{/editormd/js/jquery.min.js}"></script>
 <script th:src="@{/editormd/js/editormd.min.js}"></script>
@@ -69,7 +92,7 @@
     $(function() {
         testEditor = editormd("test-editormd", {
             width: "80%",
-            height: 700,
+            height: 680,
             syncScrolling: "single",
             emoji: false,
             path: "../editormd/lib/"

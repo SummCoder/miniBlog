@@ -1,5 +1,7 @@
 package miniblog.controller.admin;
 
+import miniblog.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/write")
 public class WriteController {
+    private final PostService postService;
+
+    @Autowired
+    public WriteController(PostService postService) {
+        this.postService = postService;
+    }
+
     @GetMapping
     public String write() {
-        return "editormd/editormd";
+        return "/admin/write";
     }
 }

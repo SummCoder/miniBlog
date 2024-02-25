@@ -7,10 +7,10 @@
 所用知识点：
 - 依赖注入
 - AOP
-- ~~Spring MVC(前后端不分离)~~
+- Spring MVC(前后端不分离)
 - JPA
 - Spring Security
-- REST API范式
+- ~~REST API范式~~
 - Docker
 
 前两天看到开源项目halo，几乎使用上述知识点就已经完成了其1.0版本的开发，所以也想要参考着做一个个人博客的项目。
