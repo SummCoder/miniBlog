@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -27,10 +29,12 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Post> postById(@PathVariable("id") Integer id) {
+    @GetMapping
+    public String postById(Integer id, Model model) {
         Optional<Post> optPost = postService.getPostById(id);
-        return optPost.map(post -> new ResponseEntity<>(post, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        Post post = optPost.orElse(new Post());
+        model.addAttribute("post", post);
+        return "admin/update";
     }
 
     @PostMapping
@@ -39,23 +43,26 @@ public class PostController {
         return postService.addPost(post);
     }
 
-    @PutMapping(path="/{id}", consumes="application/json")
-    public Post putOrder(
-            @PathVariable("id") Integer id,
-            @RequestBody Post post) {
+
+    @PutMapping(path="/{id}")
+    @ResponseBody
+    public ResponseEntity<Boolean> updatePost(@PathVariable("id") Integer id, Post post) {
         post.setId(id);
-        return postService.updatePost(post);
+        Post result = postService.updatePost(post);
+        if(!ObjectUtils.isEmpty(result)) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseBody
     public ResponseEntity<Boolean> deleteOrder(@PathVariable("id") Integer id) {
         if(postService.deletePostById(id)){
-            return new ResponseEntity<>(true, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
     }
-
-
 
 }

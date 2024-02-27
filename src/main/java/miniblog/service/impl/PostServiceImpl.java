@@ -78,7 +78,6 @@ public class PostServiceImpl implements PostService {
 
     /**
      * @desc get posts' brief information
-     * @param page pageNum
      * @return list of posts
      */
     @Override

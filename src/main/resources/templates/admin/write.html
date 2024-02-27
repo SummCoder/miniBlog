@@ -68,9 +68,9 @@
     <header>
         <ul id="nav-post">
             <li><a>Blog Dashboard</a></li>
-            <li><a href="http://localhost:8080/manage/post">内容管理</a></li>
-            <li><a href="http://localhost:8080/manage/write"><b>写文章</b></a></li>
-            <li><a href="http://localhost:8080/manage/info">修改信息</a></li>
+            <li><a th:href="@{/manage/post}">内容管理</a></li>
+            <li><a th:href="@{/manage/write}"><b>写文章</b></a></li>
+            <li><a th:href="@{/manage/info}">修改信息</a></li>
             <li style="float:right"><a href="/logout">登出</a></li>
         </ul>
     </header>
@@ -112,6 +112,7 @@
                 let statusCode = xhr.status; // 获取后端返回的状态码
                 if (statusCode === 201) {
                     alert("发布成功！")
+                    window.location.href = "/manage/post"; // 重定向到成功页面
                 }else {
                     alert("发布失败！")
                 }
