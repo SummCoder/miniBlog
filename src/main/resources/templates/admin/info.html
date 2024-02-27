@@ -52,21 +52,22 @@
         }
 
     </style>
+
 </head>
 <body>
 <div id="layout">
     <header>
         <ul id="nav-post">
             <li><a>Blog Dashboard</a></li>
-            <li><a href="manage">内容管理</a></li>
-            <li><a href="write">写文章</a></li>
-            <li><a href="info"><b>修改信息</b></a></li>
+            <li><a href="http://localhost:8080/manage/post">内容管理</a></li>
+            <li><a href="http://localhost:8080/manage/write">写文章</a></li>
+            <li><a href="http://localhost:8080/manage/info"><b>修改信息</b></a></li>
             <li style="float:right"><a href="/logout">登出</a></li>
         </ul>
     </header>
     <div style="width: 50%; background-color: white; margin: 40px auto auto; border-radius: 5px; padding: 20px">
         <h1>用户信息</h1>
-        <form method="POST" th:action="@{/admin/info}" id="userInfo">
+        <form id="userInfo" name="userInfo">
             <label for="username">用户名: </label>
             <input type="text" name="username" id="username"/>
 
@@ -75,46 +76,48 @@
 
             <label for="confirmPassword">确认密码: </label>
             <input type="password" name="confirmPassword" id="confirmPassword"/>
-
-            <input type="submit" style="margin-top: 20px; width: 10ch" value="确认更改"/>
         </form>
+        <button type="button" style="margin-top: 20px; width: 10ch; padding-top: 5px; padding-bottom: 5px" onclick="submitForm()">确认更改</button>
     </div>
 </div>
-</body>
-</html>
+<script th:src="@{/editormd/js/jquery.min.js}"></script>
+<script type="text/javascript">
+    function submitForm() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        if (username.trim() === "") {
+            alert("用户名不能为空");
+            return false;
+        }
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 获取表单和密码输入框的引用
-        const userInfo = document.getElementById('userInfo');
-        const usernameInput = document.getElementById('username')
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirmPassword');
+        if (password.trim() === "") {
+            alert("密码不能为空");
+            return false;
+        }
 
-        // 添加点击事件监听器
-        userInfo.addEventListener('submit', function(event) {
-            // 阻止表单的默认提交行为
-            event.preventDefault();
-            const username = usernameInput.value;
-            // 获取密码输入框的值
-            const passwordValue = passwordInput.value;
-            const confirmPasswordValue = confirmPasswordInput.value;
-            if (username === ""){
-                alert('用户名不能为空')
-                return
-            }
-            if (passwordValue === "") {
-                alert('密码不能为空')
-                return;
-            }
-            // 比较两次输入的密码
-            if (passwordValue !== confirmPasswordValue) {
-                // 密码不相同，显示警告框
-                alert('两次输入的密码不一致');
-            } else {
-                // 密码相同，提交表单
-                userInfo.submit();
+        if (password !== confirmPassword) {
+            alert("两次输入的密码不一致");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/admin/info",
+            data: $("#userInfo").serialize(),
+            dataType: "JSON",
+            success: function(data, textStatus, xhr) {
+                let statusCode = xhr.status; // 获取后端返回的状态码
+                if (statusCode === 200) {
+                    alert("修改成功！")
+                }else {
+                    alert("修改失败！")
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("提交失败，请稍后重试！"); // 弹窗显示提交失败信息
             }
         });
-    });
+    }
 </script>
+</body>
+</html>

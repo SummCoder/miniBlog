@@ -68,21 +68,23 @@
     <header>
         <ul id="nav-post">
             <li><a>Blog Dashboard</a></li>
-            <li><a href="manage">内容管理</a></li>
-            <li><a href="write"><b>写文章</b></a></li>
-            <li><a href="info">修改信息</a></li>
+            <li><a href="http://localhost:8080/manage/post">内容管理</a></li>
+            <li><a href="http://localhost:8080/manage/write"><b>写文章</b></a></li>
+            <li><a href="http://localhost:8080/manage/info">修改信息</a></li>
             <li style="float:right"><a href="/logout">登出</a></li>
         </ul>
     </header>
-    <div style="width: 80%; margin: 25px auto auto;">
-        <h1>写文章</h1>
-        <input type="text" id="title-input" style="width: 100%;" placeholder="输入标题">
-    </div>
-    <div id="test-editormd">
-        <textarea style="display:none;"></textarea>
-    </div>
+    <form name="mdEditorForm" id="mdEditorForm">
+        <div style="width: 80%; margin: 25px auto auto;">
+            <h1>写文章</h1>
+            <input type="text" id="title-input" name="title" style="width: 100%;" placeholder="输入标题">
+        </div>
+        <div id="test-editormd">
+            <textarea name="content" style="display:none;"></textarea>
+        </div>
+    </form>
     <div id="publish-button">
-        <button type="button">发 布</button>
+        <button type="button" onclick="submitBlog()">发 布</button>
     </div>
 </div>
 <script th:src="@{/editormd/js/jquery.min.js}"></script>
@@ -95,9 +97,30 @@
             height: 680,
             syncScrolling: "single",
             emoji: false,
-            path: "../editormd/lib/"
+            path: "../editormd/lib/",
+
         });
     });
+
+    function submitBlog() {
+        $.ajax({
+            type: "POST",
+            url: "/admin/write",
+            data: $("#mdEditorForm").serialize(),
+            dataType: "JSON",
+            success: function(data, textStatus, xhr) {
+                let statusCode = xhr.status; // 获取后端返回的状态码
+                if (statusCode === 201) {
+                    alert("发布成功！")
+                }else {
+                    alert("发布失败！")
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("提交失败，请稍后重试！"); // 弹窗显示提交失败信息
+            }
+        });
+    }
 </script>
 </body>
 </html>

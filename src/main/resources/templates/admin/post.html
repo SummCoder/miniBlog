@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniBlog</title>
+    <link rel="stylesheet" th:href="@{/editormd/css/style.css}"/>
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <style>
+
+        body {
+            background-color: #eee;
+        }
+
+        #nav-post {
+            list-style-type: none;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+            top: 0;
+            width: 80%;
+        }
+
+        #nav-post li {
+            float: left;
+        }
+
+        #nav-post li a
+        {
+            display: block;
+            color: #dcdada;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        #nav-post li a:hover
+        {
+            color: white;
+        }
+
+        table {
+            margin: 50px auto auto;
+            border-collapse: collapse;
+            width: 60%;
+            border: 1px solid black; /* 添加表格边框 */
+        }
+
+        th {
+            background-color: lightblue; /* 设置表头背景颜色 */
+            border: 1px solid black; /* 添加表头边框 */
+        }
+
+        td, th {
+            border: 1px solid black; /* 添加单元格边框 */
+            padding: 8px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+<div id="layout">
+    <header>
+        <ul id="nav-post">
+            <li><a>Blog Dashboard</a></li>
+            <li><a href="http://localhost:8080/manage/post"><b>内容管理</b></a></li>
+            <li><a href="http://localhost:8080/manage/write">写文章</a></li>
+            <li><a href="http://localhost:8080/manage/info">修改信息</a></li>
+            <li style="float:right"><a href="/logout">登出</a></li>
+        </ul>
+    </header>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>博客标题</td>
+            <td>创建时间</td>
+            <td>具体操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post, state:${postList}">
+            <td>
+                <span th:text="${post.title}"></span>
+            </td>
+            <td>
+                <span th:text="${post.createTime}"></span>
+            </td>
+            <td>
+                <button style="background-color: red; border: none; color: white; border-radius: 2px; padding: 6px 15px" onclick="deleteBlog()">删除</button>
+                <button style="background-color: green; border: none; color: white; border-radius: 2px; padding: 6px 15px; margin-left: 10px" onclick="editBlog()">更改</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script th:src="@{/editormd/js/jquery.min.js}"></script>
+<script>
+    function deleteBlog() {
+
+    }
+    function editBlog() {
+
+    }
+</script>
+</body>
+</html>

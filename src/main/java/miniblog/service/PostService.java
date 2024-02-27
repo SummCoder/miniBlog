@@ -1,5 +1,6 @@
 package miniblog.service;
 
+import miniblog.model.dto.PostBriefDTO;
 import miniblog.model.entity.Post;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface PostService {
 
     Optional<Post> getPostById(Integer id);
 
-    List<Post> getPostByPage(Integer page);
+    List<PostBriefDTO> getPosts();
 
     Long getTotalNumber();
 }

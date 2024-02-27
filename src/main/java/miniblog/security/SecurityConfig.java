@@ -32,11 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/admin/**", "/h2-console/**").hasRole("USER")
+                .mvcMatchers("/manage/**", "/h2-console/**", "/admin/**").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/admin/manage")
+                .defaultSuccessUrl("/manage/post")
                 .and()
                 .logout()
                 .and()

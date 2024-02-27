@@ -25,12 +25,6 @@ public class Post {
     private Integer id;
 
     /**
-     * Post cover
-     */
-    @Column(columnDefinition = "varchar(100) not null")
-    private String cover;
-
-    /**
      * Post title.
      */
     @Column(columnDefinition = "varchar(100) not null")

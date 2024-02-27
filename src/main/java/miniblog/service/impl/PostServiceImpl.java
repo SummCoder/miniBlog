@@ -1,5 +1,6 @@
 package miniblog.service.impl;
 
+import miniblog.model.dto.PostBriefDTO;
 import miniblog.model.entity.Post;
 import miniblog.repository.PostRepository;
 import miniblog.service.PostService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,14 +77,18 @@ public class PostServiceImpl implements PostService {
 
 
     /**
-     * @desc get posts by pageNum
+     * @desc get posts' brief information
      * @param page pageNum
      * @return list of posts
      */
     @Override
-    public List<Post> getPostByPage(Integer page) {
-        PageRequest request = PageRequest.of(page - 1, 5);
-        return postRepository.findAll(request).getContent();
+    public List<PostBriefDTO> getPosts() {
+        List<Post> postList = postRepository.findAll();
+        List<PostBriefDTO> result = new ArrayList<>();
+        for (Post post : postList) {
+            result.add(new PostBriefDTO(post.getId(), post.getTitle(), post.getCreateTime()));
+        }
+        return result;
     }
 
     /**

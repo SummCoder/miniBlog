@@ -8,9 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -20,7 +17,7 @@ import java.util.Optional;
  */
 
 @Controller
-@RequestMapping("/admin/post")
+@RequestMapping("admin/post")
 public class PostController {
 
     private final PostService postService;
@@ -59,14 +56,6 @@ public class PostController {
         }
     }
 
-    @GetMapping("/page")
-    public Map<String, Object> getPostsByPage(@RequestParam Integer pageNum) {
-        long totalNum = postService.getTotalNumber();
-        List<Post> posts = postService.getPostByPage(pageNum);
-        Map<String, Object> res = new HashMap<>();
-        res.put("data", posts);
-        res.put("total", totalNum);
-        return res;
-    }
+
 
 }

@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author SummCoder
- * @desc Just a redirect
- * @date 2024/2/22 22:43
+ * @desc
+ * @date 2024/2/26 21:37
  */
-
 @Controller
-@RequestMapping("/manage")
+@RequestMapping("console")
 public class RedirectController {
+
     @GetMapping
-    public String redirect() {
-        return "redirect:/admin/manage";
+    public String redirect(){
+        return "redirect:/manage/post";
     }
 }

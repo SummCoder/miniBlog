@@ -1,10 +1,13 @@
 package miniblog.controller.admin;
 
+import miniblog.model.entity.Post;
 import miniblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author SummCoder
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/admin/write")
+@RequestMapping("admin/write")
 public class WriteController {
     private final PostService postService;
 
@@ -22,8 +25,14 @@ public class WriteController {
         this.postService = postService;
     }
 
-    @GetMapping
-    public String write() {
-        return "/admin/write";
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Boolean> createPost(Post post) {
+        Post result = postService.addPost(post);
+        if(!ObjectUtils.isEmpty(result)) {
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
+
 }
