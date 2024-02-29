@@ -44,8 +44,73 @@
 
 
         html, body {
-            font-size: 10px;
+            font-size: 16px;
             letter-spacing: 0.01rem;
+            word-spacing: 1px;
+        }
+
+        .main ul li {
+            position: relative;
+            padding: 30px 0 30px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        li {
+            display: list-item;
+        }
+
+        .main ul {
+            list-style-type: none;
+            padding: 0 0;
+            margin: 0;
+        }
+
+        ul {
+            display: block;
+            list-style-type: disc;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0;
+            margin-inline-end: 0;
+            padding-inline-start: 40px;
+        }
+
+        .main {
+            max-width: 680px;
+            margin: 50px auto 0;
+            padding: 0 30px;
+            position: relative;
+            min-height: calc(100vh - 176px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main h3 {
+            font-size: 13px;
+            color: #999;
+            position: absolute;
+            left: 0;
+            top: 36px;
+        }
+
+        .main h2 {
+            text-align: left;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-left: 120px;
+        }
+
+        .post-navigation{
+            padding: 30px 0;
+            text-align: right;
+        }
+
+        #prev {
+            float: left;
+        }
+
+        .index-nav {
+            color: #999;
         }
 
     </style>
@@ -66,6 +131,23 @@
             <i class="fa fa-envelope-o" aria-hidden="true" style="font-size: 22px"></i>
         </a>
     </p>
+    <div class="main">
+        <ul th:each="post, state:${posts}">
+            <!-- 遍历渲染文章 -->
+            <li>
+                <h3 th:text="${#dates.format(post.createTime, 'MM dd, yyy')}">Oct 27, 2022</h3>
+                <h2 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%">
+                    <a th:href="'/post/' + ${post.id}">
+                        <span th:text="${post.title}"></span>
+                    </a>
+                </h2>
+            </li>
+        </ul>
+        <nav class="post-navigation">
+            <a id="prev" class="index-nav" th:href="@{/page/__${currentPage+(-1)}__}" th:if="${currentPage > 1}">&lt;&nbsp;NEWER</a>
+            <a id="next" class="index-nav" th:href="@{/page/__${currentPage+1}__}" th:if="${currentPage < lastPage}">OLDER&nbsp;&gt;</a>
+        </nav>
+    </div>
 
 </div>
 

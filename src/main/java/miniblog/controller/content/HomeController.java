@@ -5,10 +5,8 @@ import miniblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,16 +28,20 @@ public class HomeController {
         this.postService = postService;
     }
 
-    @GetMapping("/page")
-    @ResponseBody
-    public ResponseEntity<?> getPostsByPage(@RequestParam Integer pageNum) {
+    @GetMapping("/page/{pageNum}")
+    public String getPostsByPage(@PathVariable Integer pageNum, Model model) {
         long totalNum = postService.getTotalNumber();
         List<PostBriefDTO> posts = postService.getPostByPage(pageNum);
-
-        Map<String, Object> responseData = new HashMap<>();
-        responseData.put("totalNum", totalNum);
-        responseData.put("postList", posts);
-
-        return ResponseEntity.ok(responseData);
+        long lastPage;
+        int pageSize = 8;
+        if (totalNum % pageSize == 0){
+            lastPage = totalNum / pageSize;
+        }else {
+            lastPage = totalNum / pageSize + 1;
+        }
+        model.addAttribute("lastPage", lastPage);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("posts", posts);
+        return "/content/home";
     }
 }

@@ -80,7 +80,7 @@
         </thead>
         <tbody>
         <tr th:each="post, state:${postList}">
-            <td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px" >
                 <span th:text="${post.title}"></span>
             </td>
             <td>

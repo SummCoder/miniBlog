@@ -10,11 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2024/2/26 21:37
  */
 @Controller
-@RequestMapping("console")
+@RequestMapping("/")
 public class RedirectController {
 
+    @RequestMapping("console")
     @GetMapping
     public String redirect(){
         return "redirect:/manage/post";
+    }
+
+    @RequestMapping
+    @GetMapping
+    public String redirect_home(){
+        return "redirect:/page/1";
     }
 }
