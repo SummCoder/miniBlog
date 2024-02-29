@@ -7,7 +7,7 @@
 所用知识点：
 - 依赖注入
 - AOP
-- Spring MVC(前后端不分离)
+- Spring MVC(前后端不分离thymeleaf)
 - JPA
 - Spring Security
 - ~~REST API范式~~

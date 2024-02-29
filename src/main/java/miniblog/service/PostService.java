@@ -24,5 +24,7 @@ public interface PostService {
 
     List<PostBriefDTO> getPosts();
 
+    List<PostBriefDTO> getPostByPage(Integer page);
+
     Long getTotalNumber();
 }

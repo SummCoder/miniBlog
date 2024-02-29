@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/editormd/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/editormd/css/editormd.css}"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <title th:text="${post.title}"></title>
+    <style>
+
+        .header {
+            letter-spacing: 2px;
+            margin: 50px auto 15px;
+            text-align: center;
+        }
+
+        .header a {
+            font-size: 20px;
+            color: #444;
+            letter-spacing: 2px;
+        }
+
+        a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease,
+            border-color 0.2s ease;
+        }
+
+        .links a {
+            cursor: pointer;
+            padding: 2px;
+            margin: 0 3px;
+            color: #bbb;
+        }
+
+        .post {
+            position: relative;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            margin-right: auto;
+            margin-left: auto;
+            border-bottom: 1px solid #e6e6e6;
+            width: 40%;
+        }
+
+        .post img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .post h1 {
+            font-size: 32px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 400;
+            border-bottom: none;
+            color: #444;
+        }
+
+        .post .content p, .post .content ul, .post .content ol {
+            margin: 1em 0 1.5em;
+        }
+
+        html, body {
+            font-size: 10px;
+            letter-spacing: 0.01rem;
+        }
+
+        .blog-content {
+            font-weight: 400;
+            font-size: 16px;
+            word-spacing: 1px;
+            color: #666;
+            text-align: left;
+            line-height: 1.8em;
+        }
+
+        .post .blog-content pre {
+            font-size: 13px;
+            overflow-x: auto;
+            text-align: left;
+            padding: 15px 25px;
+            background-color: #f6f6f6;
+            line-height: 1.5em;
+        }
+
+        pre {
+            color: #525252;
+        }
+
+        pre {
+            display: block;
+            white-space: pre;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+    <div class="header">
+        <a href="/">空白的博客</a>
+    </div>
+    <p class="links" style="margin-top: 10px; margin-bottom: 15px">
+        <a title="wechat" target="" href="https://space.bilibili.com/1470773640">
+            <i class="fa fa-weixin" aria-hidden="true" style="font-size: 22px"></i>
+        </a>
+        <a title="github" target="_blank" href="https://github.com/SummCoder">
+            <i class="fa fa-github" aria-hidden="true" style="font-size:22px;"></i>
+        </a>
+        <a title="email" target="_blank" href="mailto:211250026@smail.nju.edu.cn">
+            <i class="fa fa-envelope-o" aria-hidden="true" style="font-size: 22px"></i>
+        </a>
+    </p>
+    <div class="post">
+        <div class="blog-title" style="padding: 20px; text-align: left">
+            <h1 th:text="${post.title}"></h1>
+            <h3 class="date" th:text="${#dates.format(post.createTime, 'yyyy-MM-dd HH:mm:ss')}" style="font-size: 15px; margin-top: 14px; color: #999"></h3>
+        </div>
+        <!--文章主体内容-->
+        <div class="blog-content" id="doc-content">
+            <textarea style="display:none;" placeholder="markdown" th:text="${post.content}"></textarea>
+        </div>
+    </div>
+
+</div>
+
+<link rel="stylesheet" th:href="@{/editormd/css/editormd.preview.css}" />
+<script th:src="@{/editormd/js/jquery.min.js}"></script>
+<script th:src="@{/editormd/lib/marked.min.js}"></script>
+<script th:src="@{/editormd/lib/prettify.min.js}"></script>
+<script th:src="@{/editormd/lib/raphael.min.js}"></script>
+<script th:src="@{/editormd/lib/underscore.min.js}"></script>
+<script th:src="@{/editormd/lib/sequence-diagram.min.js}"></script>
+<script th:src="@{/editormd/lib/flowchart.min.js}"></script>
+<script th:src="@{/editormd/lib/jquery.flowchart.min.js}"></script>
+<script th:src="@{/editormd/js/editormd.min.js}"></script>
+
+<script type="text/javascript">
+    let testEditor;
+    $(function () {
+        testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+            htmlDecode: "style,script,iframe",
+            emoji: true,
+            taskList: true,
+            tocm: true,
+            tex: true, // 默认不解析
+            flowChart: true, // 默认不解析
+            sequenceDiagram: true, // 默认不解析
+            codeFold: true,
+        });
+    });
+</script>
+</body>
+</html>

@@ -91,6 +91,22 @@ public class PostServiceImpl implements PostService {
     }
 
     /**
+     * @desc get posts' brief information by pageNum
+     * @param page pageNum
+     * @return list of posts
+     */
+    @Override
+    public List<PostBriefDTO> getPostByPage(Integer page) {
+        PageRequest request = PageRequest.of(page - 1, 8);
+        List<Post> postList = postRepository.findAll(request).getContent();
+        List<PostBriefDTO> result = new ArrayList<>();
+        for (Post post : postList) {
+            result.add(new PostBriefDTO(post.getId(), post.getTitle(), post.getCreateTime()));
+        }
+        return result;
+    }
+
+    /**
      * @return the total num of posts
      */
     @Override

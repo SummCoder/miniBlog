@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>MiniBlog</title>
+    <title>空白的博客</title>
     <link rel="stylesheet" th:href="@{/editormd/css/style.css}"/>
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
     <style>
@@ -84,7 +84,7 @@
                 <span th:text="${post.title}"></span>
             </td>
             <td>
-                <span th:text="${post.createTime}"></span>
+                <span th:text="${#dates.format(post.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
             </td>
             <td>
                 <button style="background-color: red; border: none; color: white; border-radius: 2px; padding: 6px 15px" th:onclick="'deleteBlog(' + ${post.id} + ')'">删除</button>
