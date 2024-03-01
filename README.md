@@ -11,7 +11,7 @@
 - JPA
 - Spring Security
 - ~~REST API范式~~
-- ~~Docker~~
+- Docker
 
 前两天看到开源项目halo，几乎使用上述知识点就已经完成了其1.0版本的开发，所以也想要参考着做一个个人博客的项目。
 
@@ -48,6 +48,7 @@
 - 基于**JPA**的数据库CRUD，现阶段采用H2数据库做持久化
 - 基于**CommandLineRunner**方式的初始化数据库
 - 采用editormd作为markdown编辑器、渲染器
+- 采用docker进行容器化部署
 
 预览图：
 ![img.png](assets/img.png)
