@@ -51,15 +51,16 @@
 - 采用docker进行容器化部署
 
 预览图：
-![img.png](assets/img.png)
 
-![img.png](assets/img2.png)
+![img.png](https://s2.loli.net/2024/03/01/be4lHwIVnG5iJaN.png)
 
-![img.png](assets/img3.png)
+![img2.png](https://s2.loli.net/2024/03/01/SYLtBsp4FZoAKkj.png)
 
-![img.png](assets/img4.png)
+![img3.png](https://s2.loli.net/2024/03/01/rqV6MHBzW29lond.png)
 
-![img.png](assets/img5.png)
+![img4.png](https://s2.loli.net/2024/03/01/eJmPdY16EMOkguA.png)
+
+![img5.png](https://s2.loli.net/2024/03/01/7XdBN6Jf8eRzc1T.png)
 
 ## 使用
 
@@ -74,3 +75,7 @@ h2数据库做了持久化，在系统用户文件夹中.miniBlog/db/blog应该�
 ### 2. 查看
 
 直接输入localhost:8080或者对应ip在浏览器中，就可直接浏览博客内容，无需身份认证。
+
+## 杂谈
+
+- 服务器被挖矿病毒攻击、网络故障、镜像错误、删库跑路、vscode远程连接操作系统不再适用...
