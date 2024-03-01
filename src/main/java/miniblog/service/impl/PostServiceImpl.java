@@ -6,6 +6,7 @@ import miniblog.repository.PostRepository;
 import miniblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     public List<PostBriefDTO> getPostByPage(Integer page) {
-        PageRequest request = PageRequest.of(page - 1, 8);
+        PageRequest request = PageRequest.of(page - 1, 8, Sort.by(Sort.Direction.DESC, "id"));
         List<Post> postList = postRepository.findAll(request).getContent();
         List<PostBriefDTO> result = new ArrayList<>();
         for (Post post : postList) {
