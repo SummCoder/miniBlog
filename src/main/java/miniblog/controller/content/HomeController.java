@@ -42,6 +42,6 @@ public class HomeController {
         model.addAttribute("lastPage", lastPage);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("posts", posts);
-        return "/content/home";
+        return "content/home";
     }
 }
